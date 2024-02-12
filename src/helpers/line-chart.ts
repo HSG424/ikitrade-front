@@ -1,3 +1,4 @@
+import { DatumValue } from "@nivo/line";
 import { DataArr, Intervals } from "../types/types";
 
 export const firstAndLastStr = (data: DataArr): [string, string] => {
@@ -45,4 +46,14 @@ export const theme = {
       strokeWidth: 2,
     },
   },
+};
+
+export const formatXaxis = (val: string) => {
+  const date = new Date(val);
+  return `${monthNames[date.getMonth()]} ${date.getDate() + 1}`;
+};
+
+export const formatTooltip = (val: DatumValue) => {
+  const date = new Date(val);
+  return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear()}`;
 };

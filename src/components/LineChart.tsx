@@ -3,8 +3,9 @@ import { DataArr, Intervals } from "../types/types";
 import {
   tickValues,
   firstAndLastStr,
-  monthNames,
   theme,
+  formatXaxis,
+  formatTooltip,
 } from "../helpers/line-chart.ts";
 import Tooltip from "./Tooltip";
 
@@ -26,17 +27,9 @@ const LineChart = ({
     xScale={{ type: "point" }}
     axisBottom={{
       tickValues: tickValues(data, interval),
-      format: (val) => {
-        const date = new Date(val);
-        return `${monthNames[date.getMonth()]} ${date.getDate() + 1}`;
-      },
+      format: formatXaxis,
     }}
-    xFormat={(val) => {
-      const date = new Date(val);
-      return `${date.getMonth() + 1}/${
-        date.getDate() + 1
-      }/${date.getFullYear()}`;
-    }}
+    xFormat={formatTooltip}
     yScale={{
       type: "linear",
       min: "auto",
