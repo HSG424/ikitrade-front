@@ -1,5 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 import { DataArr, Intervals } from "../types/types";
+import Tooltip from "./Tooltip";
 
 const monthNames = [
   "Jan",
@@ -59,23 +60,10 @@ const LineChart = ({
     data={data}
     tooltip={(data) => {
       const { xFormatted, yFormatted } = data.point.data;
-      return (
-        <div
-          style={{
-            background: "rgba(0, 0, 0, 0.6)",
-            color: "#ffffff",
-            padding: "7px 9px",
-            fontSize: "17px",
-            borderRadius: "4px",
-          }}
-        >
-          <div>{xFormatted}</div>
-          <div>${yFormatted}</div>
-        </div>
-      );
+      return <Tooltip x={xFormatted} y={yFormatted} />;
     }}
     lineWidth={3}
-    margin={{ top: 10, right: 24, bottom: 50, left: 50 }}
+    margin={{ top: 16, right: 42, bottom: 40, left: 65 }}
     xScale={{ type: "point" }}
     axisBottom={{
       tickValues: tickValues(data, interval),
@@ -104,9 +92,6 @@ const LineChart = ({
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "",
-      legendOffset: -40,
-      legendPosition: "middle",
     }}
     gridXValues={firstAndLastStr(data)}
     colors={["#80c894"]}
