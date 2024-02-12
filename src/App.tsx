@@ -3,9 +3,9 @@ import LineChart from "./components/LineChart";
 import mockData from "./test-data/mockData.ts";
 import mockData2 from "./test-data/mockData2.ts";
 import Input from "./components/Input.tsx";
-import logo from "/iki-logo.png";
 import { DataArr, Intervals } from "./types/types";
 import "./App.css";
+import logo from "/iki-logo.png";
 
 const mainData: {
   "5D": DataArr;

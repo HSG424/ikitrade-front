@@ -9,7 +9,7 @@ async function sendRequest(searchInput: string) {
   console.log("sendRequest results: ", results);
 }
 
-const Button = () => {
+const Input = () => {
   const [searchInput, setSearchInput] = useState("");
 
   const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,4 +36,4 @@ const Button = () => {
   );
 };
 
-export default Button;
+export default Input;

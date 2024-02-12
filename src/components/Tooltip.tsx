@@ -1,11 +1,17 @@
 type TooltipPt = string | number;
 
-export const Tooltip = (props: { x: TooltipPt; y: TooltipPt }) => {
+interface TooltipProps {
+  x: TooltipPt;
+  y: TooltipPt;
+}
+
+const Tooltip = ({ x, y }: TooltipProps) => {
   return (
     <div className="tooltip">
-      <p>{props.x}</p>
-      <p>${props.y}</p>
+      <p>{x}</p>
+      <p>${y}</p>
     </div>
   );
 };
+
 export default Tooltip;
