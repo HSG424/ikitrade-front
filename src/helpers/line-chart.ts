@@ -1,5 +1,6 @@
 import { DatumValue } from "@nivo/line";
 import { DataArr, Intervals } from "../types/types";
+import { monthNames } from "./date";
 
 export const firstAndLastStr = (data: DataArr): [string, string] => {
   const arr = data[0].data;
@@ -19,21 +20,6 @@ export const tickValues = (data: DataArr, interval: Intervals) => {
   }
 };
 
-export const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
 export const theme = {
   background: "#202124",
   text: {
@@ -50,10 +36,10 @@ export const theme = {
 
 export const formatXaxis = (val: string) => {
   const date = new Date(val);
-  return `${monthNames[date.getMonth()]} ${date.getDate() + 1}`;
+  return `${monthNames[date.getMonth()]} ${date.getDate()}`;
 };
 
 export const formatTooltip = (val: DatumValue) => {
   const date = new Date(val);
-  return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear()}`;
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 };

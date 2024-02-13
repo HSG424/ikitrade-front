@@ -5,6 +5,8 @@ const jsonStr1 =
 
 const jsonObj1 = JSON.parse(jsonStr1);
 
+console.log("jsonObj1", jsonObj1);
+
 const map = jsonObj1.map((obj: APIresponse) => {
   return {
     x: obj.date.slice(0, 10),

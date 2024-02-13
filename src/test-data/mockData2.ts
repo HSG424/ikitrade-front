@@ -9,6 +9,8 @@ const jsonStr =
 
 const jsonObj = JSON.parse(jsonStr);
 
+console.log("jsonObj", jsonObj);
+
 const jsonObjSlice = jsonObj.slice(-5);
 
 const map = jsonObjSlice.map((obj: APIresponse) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import LineChart from "./components/LineChart";
 import mockData from "./test-data/mockData.ts";
 import mockData2 from "./test-data/mockData2.ts";
@@ -6,6 +6,7 @@ import Input from "./components/Input.tsx";
 import { DataArr, Intervals } from "./types/types";
 import "./App.css";
 import logo from "/iki-logo.png";
+import { startEndDateCalc } from "./helpers/date.ts";
 
 const mainData: {
   "5D": DataArr;
@@ -27,6 +28,45 @@ function App() {
     setInterval(length);
     setData(mainData[length]);
   };
+
+  const fetchChartDataHandler = useCallback(async () => {
+    const [startDate, endDate] = startEndDateCalc(interval);
+
+    console.log("endDate", endDate);
+    console.log("startDate", startDate);
+
+    const symbol = "MSI";
+    // const startDate = "2024-1-2";
+    // const endDate = "2024-1-12";
+    const resampleFreq = "daily";
+    const sort = "date";
+
+    console.log(
+      "the url: ",
+      `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=${sort}`
+    );
+
+    const url = "https://champagne-basket-clam-garb.cyclic.app/";
+    const endpoint = `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=${sort}`;
+    /*
+    try {
+      const response = await fetch(`${url}${endpoint}`);
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const data = await response.json();
+
+      console.log("fetchChartDataHandler response.json(): ", data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    */
+  }, [interval]);
+
+  useEffect(() => {
+    fetchChartDataHandler();
+  }, [fetchChartDataHandler, interval]);
 
   return (
     <>
