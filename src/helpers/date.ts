@@ -25,7 +25,7 @@ export const startEndDateCalc = (interval: Intervals) => {
 
   switch (interval) {
     case "5D":
-      date.setDate(date.getDate() - 10);
+      date.setDate(date.getDate() - 12);
       break;
     case "1M":
       date.setMonth(date.getMonth() - 1);
