@@ -9,7 +9,7 @@ import { processChartData } from "./helpers/api";
 
 function App() {
   const [data, setData] = useState<DataArr>([]);
-  const [interval, setInterval] = useState<Intervals>("5D");
+  const [interval, setInterval] = useState<Intervals>("6M");
 
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
@@ -20,23 +20,11 @@ function App() {
 
   const fetchChartDataHandler = useCallback(async () => {
     const [startDate, endDate] = startEndDateCalc(interval);
-
-    console.log("endDate", endDate);
-    console.log("startDate", startDate);
-
+    const resampleFreq = interval === "5Y" ? "weekly" : "daily";
     const symbol = "MSI";
-    // const startDate = "2024-1-2";
-    // const endDate = "2024-1-12";
-    const resampleFreq = "daily";
-    const sort = "date";
-
-    console.log(
-      "the url: ",
-      `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=${sort}`
-    );
 
     const url = "https://champagne-basket-clam-garb.cyclic.app/";
-    const endpoint = `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=${sort}`;
+    const endpoint = `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=date`;
 
     try {
       const response = await fetch(`${url}${endpoint}`);
@@ -68,6 +56,9 @@ function App() {
       <div className="intervals">
         <button onClick={clickIntervalHandler.bind(null, "5D")}>5D</button>
         <button onClick={clickIntervalHandler.bind(null, "1M")}>1M</button>
+        <button onClick={clickIntervalHandler.bind(null, "6M")}>6M</button>
+        <button onClick={clickIntervalHandler.bind(null, "1Y")}>1Y</button>
+        <button onClick={clickIntervalHandler.bind(null, "5Y")}>5Y</button>
       </div>
       <div className="line-chart">
         {data.length > 0 && <LineChart data={data} interval={interval} />}

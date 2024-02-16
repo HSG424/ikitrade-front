@@ -30,6 +30,15 @@ export const startEndDateCalc = (interval: Intervals) => {
     case "1M":
       date.setMonth(date.getMonth() - 1);
       break;
+    case "6M":
+      date.setMonth(date.getMonth() - 6);
+      break;
+    case "1Y":
+      date.setFullYear(date.getFullYear() - 1);
+      break;
+    case "5Y":
+      date.setFullYear(date.getFullYear() - 5);
+      break;
   }
 
   const startDate = dateFormat(date);

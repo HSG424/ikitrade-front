@@ -1,12 +1,11 @@
-import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveLine, DatumValue } from "@nivo/line";
 import { DataArr, Intervals } from "../types/types";
 import {
   tickValues,
   firstAndLastStr,
   theme,
-  formatXaxis,
-  formatTooltip,
-} from "../helpers/line-chart.ts";
+  dateMonth,
+} from "../helpers/line-chart";
 import Tooltip from "./Tooltip";
 
 interface LineChartProps {
@@ -30,9 +29,15 @@ const LineChart = ({ data, interval }: LineChartProps) => (
       tickPadding: 2,
       tickRotation: 0,
       tickValues: tickValues(data, interval),
-      format: formatXaxis,
+      format: (val: string) => {
+        const [dateNum, month] = dateMonth(val);
+        return `${month} ${interval !== "5Y" ? dateNum[2] : dateNum[0]}`;
+      },
     }}
-    xFormat={formatTooltip}
+    xFormat={(val: DatumValue) => {
+      const [dateNum] = dateMonth(val);
+      return `${dateNum[1]}/${dateNum[2]}/${dateNum[0]}`;
+    }}
     gridXValues={firstAndLastStr(data)}
     yScale={{
       type: "linear",

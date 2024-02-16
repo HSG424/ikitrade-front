@@ -1,5 +1,5 @@
 import { DatumValue } from "@nivo/line";
-import { DataArr, Intervals } from "../types/types";
+import { DataArr, Intervals, tickData } from "../types/types";
 import { monthNames } from "./date";
 
 export const firstAndLastStr = (data: DataArr): [string, string] => {
@@ -9,14 +9,24 @@ export const firstAndLastStr = (data: DataArr): [string, string] => {
   return [firstStr, lastStr];
 };
 
+const xValues = (ticksSelected: number[], ticks: tickData[]) => {
+  if (ticksSelected.length > 0) return ticksSelected.map((el) => ticks[el].x);
+  return ticks.map((el) => el.x);
+};
+
 export const tickValues = (data: DataArr, interval: Intervals) => {
+  const ticks = data[0].data;
   switch (interval) {
     case "5D":
-      return data[0].data.map((el) => el.x);
+      return xValues([], ticks);
     case "1M":
-      return [3, 8, 13, 18].map((el) => data[0].data[el].x);
-    default:
-      return [];
+      return xValues([3, 8, 13, 18], ticks);
+    case "6M":
+      return xValues([21, 49, 77, 104], ticks);
+    case "1Y":
+      return xValues([39, 90, 147, 205], ticks);
+    case "5Y":
+      return xValues([40, 97, 156, 218], ticks);
   }
 };
 
@@ -34,12 +44,9 @@ export const theme = {
   },
 };
 
-export const formatXaxis = (val: string) => {
-  const date = new Date(val);
-  return `${monthNames[date.getMonth()]} ${date.getDate()}`;
-};
-
-export const formatTooltip = (val: DatumValue) => {
-  const date = new Date(val);
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+export const dateMonth = (val: string | DatumValue) => {
+  const dateStr = val.toString().split("-");
+  const dateNum = dateStr.map((str) => parseInt(str));
+  const month = monthNames[dateNum[1] - 1];
+  return [dateNum, month];
 };

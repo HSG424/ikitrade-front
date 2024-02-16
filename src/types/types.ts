@@ -1,14 +1,16 @@
+export interface tickData {
+  x: string;
+  y: number;
+}
+
 interface Data {
-  data: {
-    x: string;
-    y: number;
-  }[];
+  data: tickData[];
   id: string;
 }
 
 export type DataArr = Data[];
 
-export type Intervals = "5D" | "1M";
+export type Intervals = "5D" | "1M" | "6M" | "1Y" | "5Y";
 
 export interface APIresponse {
   adjClose: number;
