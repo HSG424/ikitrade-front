@@ -6,10 +6,17 @@ import "./App.css";
 import logo from "/iki-logo.png";
 import { startEndDateCalc } from "./helpers/date";
 import { processChartData } from "./helpers/api";
+import {
+  API_DOMAIN,
+  API_DAILY,
+  DEFAULT_INTERVAL,
+  DEFAULT_COMPANY,
+  BUTTON_INTERVALS,
+} from "./config";
 
 function App() {
   const [data, setData] = useState<DataArr>([]);
-  const [interval, setInterval] = useState<Intervals>("6M");
+  const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
 
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
@@ -21,13 +28,13 @@ function App() {
   const fetchChartDataHandler = useCallback(async () => {
     const [startDate, endDate] = startEndDateCalc(interval);
     const resampleFreq = interval === "5Y" ? "weekly" : "daily";
-    const symbol = "MSI";
+    const symbol = DEFAULT_COMPANY;
 
-    const url = "https://champagne-basket-clam-garb.cyclic.app/";
-    const endpoint = `/api/daily/${symbol}?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=date`;
+    const resource = `${API_DAILY}/${symbol}`;
+    const queryParams = `?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=date`;
 
     try {
-      const response = await fetch(`${url}${endpoint}`);
+      const response = await fetch(`${API_DOMAIN}${resource}${queryParams}`);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -54,11 +61,11 @@ function App() {
         <Input />
       </div>
       <div className="intervals">
-        <button onClick={clickIntervalHandler.bind(null, "5D")}>5D</button>
-        <button onClick={clickIntervalHandler.bind(null, "1M")}>1M</button>
-        <button onClick={clickIntervalHandler.bind(null, "6M")}>6M</button>
-        <button onClick={clickIntervalHandler.bind(null, "1Y")}>1Y</button>
-        <button onClick={clickIntervalHandler.bind(null, "5Y")}>5Y</button>
+        {BUTTON_INTERVALS.map((interval, i) => (
+          <button onClick={clickIntervalHandler.bind(null, interval)} key={i}>
+            {interval}
+          </button>
+        ))}
       </div>
       <div className="line-chart">
         {data.length > 0 && <LineChart data={data} interval={interval} />}

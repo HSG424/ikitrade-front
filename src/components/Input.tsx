@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { API_DOMAIN, API_SEARCH } from "../config";
 
 async function sendRequest(searchInput: string) {
-  const response = await fetch(
-    // `https://champagne-basket-clam-garb.cyclic.app/api/search-fid?search=${searchInput}`
-    `https://champagne-basket-clam-garb.cyclic.app/api/search-fin?search=${searchInput}`
-  );
+  const queryParams = `?search=${searchInput}`;
+  const response = await fetch(`${API_DOMAIN}${API_SEARCH}${queryParams}`);
   const results = await response.json();
   console.log("sendRequest results: ", results);
 }
