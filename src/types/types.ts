@@ -10,7 +10,7 @@ interface Data {
 
 export type DataArr = Data[];
 
-export type Intervals = "5D" | "1M" | "6M" | "1Y" | "5Y";
+export type Intervals = "6D" | "1M" | "6M" | "1Y" | "5Y";
 
 export interface APIresponse {
   adjClose: number;

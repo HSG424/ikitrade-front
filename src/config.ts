@@ -11,4 +11,4 @@ export const DEFAULT_INTERVAL: Intervals = "6M";
 
 export const DEFAULT_COMPANY = "MSI";
 
-export const BUTTON_INTERVALS: Intervals[] = ["5D", "1M", "6M", "1Y", "5Y"];
+export const BUTTON_INTERVALS: Intervals[] = ["6D", "1M", "6M", "1Y", "5Y"];

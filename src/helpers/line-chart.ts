@@ -17,7 +17,7 @@ const xValues = (ticksSelected: number[], ticks: tickData[]) => {
 export const tickValues = (data: DataArr, interval: Intervals) => {
   const ticks = data[0].data;
   switch (interval) {
-    case "5D":
+    case "6D":
       return xValues([], ticks);
     case "1M":
       return xValues([3, 8, 13, 18], ticks);
