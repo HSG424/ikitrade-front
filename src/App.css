@@ -58,3 +58,23 @@ form label {
   padding: 0;
   margin: 0;
 }
+
+.loading-container {
+  padding-top: 38px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.loading-container img {
+  width: 60px;
+  display: block;
+  margin: 0 auto;
+  animation: spin 2s linear infinite;
+}

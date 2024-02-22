@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import LineChart from "./components/LineChart";
-import Input from "./components/Input.tsx";
+import Input from "./components/Input";
+import Loading from "./components/Loading";
 import { DataArr, Intervals } from "./types/types";
 import "./App.css";
 import logo from "/iki-logo.png";
@@ -17,6 +18,7 @@ import {
 function App() {
   const [data, setData] = useState<DataArr>([]);
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
+  const [isLoading, setIsLoading] = useState(true);
 
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
@@ -26,6 +28,8 @@ function App() {
   };
 
   const fetchChartDataHandler = useCallback(async () => {
+    setIsLoading(true);
+
     const [startDate, endDate] = startEndDateCalc(interval);
     const resampleFreq = interval === "5Y" ? "weekly" : "daily";
     const symbol = DEFAULT_COMPANY;
@@ -43,11 +47,25 @@ function App() {
     } catch (error) {
       console.log("error: ", error);
     }
+    setIsLoading(false);
   }, [interval]);
 
   useEffect(() => {
     fetchChartDataHandler();
   }, [fetchChartDataHandler, interval]);
+
+  let content = <p></p>;
+  if (data.length > 0) {
+    content = <LineChart data={data} interval={interval} />;
+  }
+  /*
+  if (error) {
+    content = <p>{error}</p>;
+  }
+*/
+  if (isLoading) {
+    content = <Loading />;
+  }
 
   return (
     <>
@@ -67,9 +85,7 @@ function App() {
           </button>
         ))}
       </div>
-      <div className="line-chart">
-        {data.length > 0 && <LineChart data={data} interval={interval} />}
-      </div>
+      <div className="line-chart">{content}</div>
     </>
   );
 }
