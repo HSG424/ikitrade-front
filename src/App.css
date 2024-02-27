@@ -1,6 +1,7 @@
 body {
   background: #202124;
   max-width: 1080px;
+  color: #fff;
 }
 
 .line-chart {
@@ -77,4 +78,10 @@ form label {
   display: block;
   margin: 0 auto;
   animation: spin 2s linear infinite;
+}
+
+.error {
+  text-align: center;
+  margin-top: 35px;
+  font-size: 22px;
 }

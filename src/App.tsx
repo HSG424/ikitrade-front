@@ -19,6 +19,7 @@ function App() {
   const [data, setData] = useState<DataArr>([]);
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
@@ -45,7 +46,7 @@ function App() {
       const data = await response.json();
       setData(processChartData(data, interval));
     } catch (error) {
-      console.log("error: ", error);
+      setError(error instanceof Error ? error.message : String(error));
     }
     setIsLoading(false);
   }, [interval]);
@@ -58,11 +59,11 @@ function App() {
   if (data.length > 0) {
     content = <LineChart data={data} interval={interval} />;
   }
-  /*
+
   if (error) {
-    content = <p>{error}</p>;
+    content = <p className="error">{error}</p>;
   }
-*/
+
   if (isLoading) {
     content = <Loading />;
   }
@@ -71,7 +72,7 @@ function App() {
     <>
       <div className="top-flex">
         <div>
-          <a href="https://developerhan.com" target="_blank">
+          <a href="#" target="_blank">
             <img src={logo} alt="" />
           </a>
         </div>
