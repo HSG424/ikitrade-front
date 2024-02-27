@@ -9,6 +9,7 @@ export const API_SEARCH = "/api/search-fin";
 
 export const DEFAULT_INTERVAL: Intervals = "6M";
 
-export const DEFAULT_COMPANY = "MSI";
+// export const DEFAULT_COMPANY = "MSI";
+export const DEFAULT_COMPANY = "BRK-A";
 
 export const BUTTON_INTERVALS: Intervals[] = ["6D", "1M", "6M", "1Y", "5Y"];

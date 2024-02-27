@@ -10,8 +10,9 @@ export const firstAndLastStr = (data: DataArr): [string, string] => {
 };
 
 const xValues = (ticksSelected: number[], ticks: tickData[]) => {
-  if (ticksSelected.length > 0) return ticksSelected.map((el) => ticks[el].x);
-  return ticks.map((el) => el.x);
+  if (ticksSelected.length > 0)
+    return ticksSelected.map((el) => ticks[el]?.x || "");
+  return ticks.map((el) => el?.x || "");
 };
 
 export const tickValues = (data: DataArr, interval: Intervals) => {

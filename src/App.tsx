@@ -18,18 +18,17 @@ import {
 function App() {
   const [data, setData] = useState<DataArr>([]);
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
     console.log("passed the if guard clause");
-    setData([]);
     setInterval(length);
   };
 
   const fetchChartDataHandler = useCallback(async () => {
-    setIsLoading(true);
+    setData([]);
+    setError("");
 
     const [startDate, endDate] = startEndDateCalc(interval);
     const resampleFreq = interval === "5Y" ? "weekly" : "daily";
@@ -48,24 +47,18 @@ function App() {
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     }
-    setIsLoading(false);
   }, [interval]);
 
   useEffect(() => {
     fetchChartDataHandler();
   }, [fetchChartDataHandler, interval]);
 
-  let content = <p></p>;
+  let content = <Loading />;
   if (data.length > 0) {
     content = <LineChart data={data} interval={interval} />;
   }
-
   if (error) {
     content = <p className="error">{error}</p>;
-  }
-
-  if (isLoading) {
-    content = <Loading />;
   }
 
   return (
