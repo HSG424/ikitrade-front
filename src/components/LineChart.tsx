@@ -55,7 +55,9 @@ const LineChart = ({ data, interval }: LineChartProps) => (
       tickPadding: 6,
       tickRotation: 0,
       format: (val: string) => {
-        return String(numberWithCommas(Number(val)));
+        const num = Number(val);
+        if (!(num >= 1000)) return val;
+        return String(numberWithCommas(num));
       },
     }}
     colors={["#80c894"]}
