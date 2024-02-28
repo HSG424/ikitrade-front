@@ -51,3 +51,7 @@ export const dateMonth = (val: string | DatumValue) => {
   const month = monthNames[dateNum[1] - 1];
   return [dateNum, month];
 };
+
+export function numberWithCommas(x: number) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

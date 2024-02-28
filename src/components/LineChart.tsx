@@ -5,6 +5,7 @@ import {
   firstAndLastStr,
   theme,
   dateMonth,
+  numberWithCommas,
 } from "../helpers/line-chart";
 import Tooltip from "./Tooltip";
 
@@ -46,13 +47,16 @@ const LineChart = ({ data, interval }: LineChartProps) => (
       stacked: true,
       reverse: false,
     }}
-    yFormat=" >-.2f"
+    yFormat=" >-,.2f"
     axisTop={null}
     axisRight={null}
     axisLeft={{
       tickSize: 0,
       tickPadding: 6,
       tickRotation: 0,
+      format: (val: string) => {
+        return String(numberWithCommas(Number(val)));
+      },
     }}
     colors={["#80c894"]}
     enablePoints={false}
