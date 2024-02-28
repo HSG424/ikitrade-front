@@ -1,5 +1,5 @@
 import { DatumValue } from "@nivo/line";
-import { DataArr, Intervals, tickData } from "../types/types";
+import { DataArr, Intervals } from "../types/types";
 import { monthNames } from "./date";
 
 export const firstAndLastStr = (data: DataArr): [string, string] => {
@@ -9,26 +9,16 @@ export const firstAndLastStr = (data: DataArr): [string, string] => {
   return [firstStr, lastStr];
 };
 
-const xValues = (ticksSelected: number[], ticks: tickData[]) => {
-  if (ticksSelected.length > 0)
-    return ticksSelected.map((el) => ticks[el]?.x || "");
-  return ticks.map((el) => el?.x || "");
-};
-
 export const tickValues = (data: DataArr, interval: Intervals) => {
   const ticks = data[0].data;
-  switch (interval) {
-    case "6D":
-      return xValues([], ticks);
-    case "1M":
-      return xValues([3, 8, 13, 18], ticks);
-    case "6M":
-      return xValues([21, 49, 77, 104], ticks);
-    case "1Y":
-      return xValues([39, 90, 147, 205], ticks);
-    case "5Y":
-      return xValues([40, 97, 156, 218], ticks);
-  }
+
+  if (interval === "6D") return ticks.map((el) => el.x);
+
+  const intervals = Math.ceil(ticks.length / 5);
+  const ticksFilter = ticks.filter(
+    (_, i) => i !== 0 && (i + 1) % intervals === 0
+  );
+  return ticksFilter.map((el) => el.x);
 };
 
 export const theme = {
