@@ -27,3 +27,10 @@ export interface APIresponse {
   splitFactor: number;
   volume: number;
 }
+
+interface Result {
+  desc: string;
+  symbol: string;
+}
+
+export type Results = Result[] | [];

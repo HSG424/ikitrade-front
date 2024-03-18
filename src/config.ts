@@ -4,8 +4,8 @@ export const API_DOMAIN = "https://champagne-basket-clam-garb.cyclic.app";
 
 export const API_DAILY = "/api/daily";
 
-export const API_SEARCH = "/api/search-fin";
-// export const API_SEARCH = "/api/search-fid";
+// export const API_SEARCH = "/api/search-fin";
+export const API_SEARCH = "/api/search-fid";
 
 export const DEFAULT_INTERVAL: Intervals = "6M";
 
