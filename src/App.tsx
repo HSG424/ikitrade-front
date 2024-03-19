@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import LineChart from "./components/LineChart";
-import Input from "./components/Input";
+import Search from "./components/Search";
 import Loading from "./components/Loading";
+import SelectedCompany from "./components/SelectedCompany";
 import { DataArr, Intervals } from "./types/types";
 import "./App.css";
 import logo from "/iki-logo.png";
@@ -20,6 +21,15 @@ function App() {
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
   const [error, setError] = useState("");
 
+  const [selectedCompany, setSelectedCompany] = useState(DEFAULT_COMPANY);
+
+  const selectCompanyHandler = (symbol: string, desc: string) => {
+    setSelectedCompany({
+      symbol,
+      desc,
+    });
+  };
+
   const clickIntervalHandler = (length: Intervals) => {
     if (length === interval) return;
     console.log("passed the if guard clause");
@@ -32,7 +42,7 @@ function App() {
 
     const [startDate, endDate] = startEndDateCalc(interval);
     const resampleFreq = interval === "5Y" ? "weekly" : "daily";
-    const symbol = DEFAULT_COMPANY;
+    const symbol = selectedCompany.symbol;
 
     const resource = `${API_DAILY}/${symbol}`;
     const queryParams = `?startDate=${startDate}&endDate=${endDate}&resampleFreq=${resampleFreq}&sort=date`;
@@ -47,7 +57,7 @@ function App() {
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     }
-  }, [interval]);
+  }, [interval, selectedCompany]);
 
   useEffect(() => {
     fetchChartDataHandler();
@@ -70,8 +80,9 @@ function App() {
           </a>
         </div>
 
-        <Input />
+        <Search onSelectCompany={selectCompanyHandler} />
       </div>
+      <SelectedCompany selectedCompany={selectedCompany} />
       <div className="intervals">
         {BUTTON_INTERVALS.map((interval, i) => (
           <button onClick={clickIntervalHandler.bind(null, interval)} key={i}>

@@ -9,8 +9,9 @@ export const API_SEARCH = "/api/search-fid";
 
 export const DEFAULT_INTERVAL: Intervals = "6M";
 
-// export const DEFAULT_COMPANY = "MSI";
-export const DEFAULT_COMPANY = "BRK-A";
-export const DEFAULT_COMPANY_DESC = "Berkshire Hathaway Inc Class A";
+export const DEFAULT_COMPANY = {
+  symbol: "BRK-A",
+  desc: "Berkshire Hathaway Inc Class A",
+};
 
 export const BUTTON_INTERVALS: Intervals[] = ["6D", "1M", "6M", "1Y", "5Y"];

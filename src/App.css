@@ -85,3 +85,19 @@ form label {
   margin-top: 35px;
   font-size: 22px;
 }
+
+.search-results ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.search-results ul li {
+  cursor: pointer;
+  margin: 9px 0;
+  padding: 7px 9px;
+}
+
+.search-results ul li:hover {
+  background-color: #3c3e44;
+  background-color: #303136;
+}

@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  API_DOMAIN,
-  API_SEARCH,
-  DEFAULT_COMPANY,
-  DEFAULT_COMPANY_DESC,
-} from "../config";
+import { API_DOMAIN, API_SEARCH } from "../config";
 import Loading from "./Loading";
 import { Results } from "../types/types";
 
@@ -15,7 +10,11 @@ async function sendRequest(searchInput: string) {
   return JSON.parse(results).securities;
 }
 
-const Input = () => {
+interface SearchProps {
+  onSelectCompany: (symbol: string, desc: string) => void;
+}
+
+const Search = ({ onSelectCompany }: SearchProps) => {
   const [searchLoading, setSearchLoading] = useState(false);
 
   const [noSearchYet, setNoSearchYet] = useState(true);
@@ -52,6 +51,14 @@ const Input = () => {
     setSearchInput(event.target.value);
   };
 
+  const resultClickHandler = (event: React.MouseEvent<HTMLElement>) => {
+    const symbol = event.currentTarget.dataset.symbol!;
+    const desc = event.currentTarget.dataset.desc!;
+    setNoSearchYet(true);
+    setSearchResults([]);
+    onSelectCompany(symbol, desc);
+  };
+
   let search = <div></div>;
   if (searchLoading) {
     search = <Loading />;
@@ -59,8 +66,13 @@ const Input = () => {
     search = (
       <ul>
         {searchResults.map((results) => (
-          <li key={results.symbol}>
-            {results.desc} - {results.symbol}
+          <li
+            key={results.symbol}
+            onClick={resultClickHandler}
+            data-symbol={results.symbol}
+            data-desc={results.desc}
+          >
+            {results.symbol} : {results.desc}
           </li>
         ))}
       </ul>
@@ -70,7 +82,7 @@ const Input = () => {
   }
 
   return (
-    <div>
+    <div className="search-results">
       <form>
         <label htmlFor="search">Search</label>
         <input
@@ -84,13 +96,9 @@ const Input = () => {
           maxLength={10}
         />
       </form>
-      <div className="selectedCompany">
-        <p>{`Symbol: ${DEFAULT_COMPANY}`}</p>
-        <p>{`${DEFAULT_COMPANY_DESC}`}</p>
-      </div>
       {search}
     </div>
   );
 };
 
-export default Input;
+export default Search;
