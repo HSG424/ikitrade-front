@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { API_DOMAIN, API_SEARCH } from "../config";
+import {
+  API_DOMAIN,
+  API_SEARCH,
+  DEFAULT_COMPANY,
+  DEFAULT_COMPANY_DESC,
+} from "../config";
 import Loading from "./Loading";
 import { Results } from "../types/types";
 
@@ -72,10 +77,17 @@ const Input = () => {
           type="text"
           id="search"
           name="search"
+          placeholder="Search ticker, company or profile"
           value={searchInput}
           onChange={searchChangeHandler}
+          size={25}
+          maxLength={10}
         />
       </form>
+      <div className="selectedCompany">
+        <p>{`Symbol: ${DEFAULT_COMPANY}`}</p>
+        <p>{`${DEFAULT_COMPANY_DESC}`}</p>
+      </div>
       {search}
     </div>
   );
