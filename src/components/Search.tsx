@@ -11,16 +11,14 @@ async function sendRequest(searchInput: string) {
 }
 
 interface SearchProps {
+  hideSearchResults: boolean;
   onSelectCompany: (symbol: string, desc: string) => void;
 }
 
-const Search = ({ onSelectCompany }: SearchProps) => {
+const Search = ({ onSelectCompany, hideSearchResults }: SearchProps) => {
   const [searchLoading, setSearchLoading] = useState(false);
-
   const [noSearchYet, setNoSearchYet] = useState(true);
-
   const [searchInput, setSearchInput] = useState("");
-
   const [searchResults, setSearchResults] = useState<Results>([]);
 
   const sendRequestComp = async (searchInput: string) => {
@@ -54,19 +52,20 @@ const Search = ({ onSelectCompany }: SearchProps) => {
   const resultClickHandler = (event: React.MouseEvent<HTMLElement>) => {
     const symbol = event.currentTarget.dataset.symbol!;
     const desc = event.currentTarget.dataset.desc!;
-    setNoSearchYet(true);
-    setSearchResults([]);
     onSelectCompany(symbol, desc);
   };
+
+  const hideResults = hideSearchResults ? "hidden" : "";
 
   let search = <div></div>;
   if (searchLoading) {
     search = <Loading />;
   } else if (searchResults.length > 0) {
     search = (
-      <ul>
+      <ul className={hideResults}>
         {searchResults.map((results) => (
           <li
+            className="search-result"
             key={results.symbol}
             onClick={resultClickHandler}
             data-symbol={results.symbol}
@@ -78,21 +77,25 @@ const Search = ({ onSelectCompany }: SearchProps) => {
       </ul>
     );
   } else if (searchResults.length === 0 && !noSearchYet) {
-    search = <p>No results.</p>;
+    search = (
+      <ul className={hideResults}>
+        <li>No Results</li>
+      </ul>
+    );
   }
 
   return (
-    <div className="search-results">
+    <div className="search-cont">
       <form>
         <label htmlFor="search">Search</label>
         <input
           type="text"
           id="search"
           name="search"
+          className="search-input"
           placeholder="Search ticker, company or profile"
           value={searchInput}
           onChange={searchChangeHandler}
-          size={25}
           maxLength={10}
         />
       </form>

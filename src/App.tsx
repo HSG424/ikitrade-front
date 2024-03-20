@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, MouseEvent } from "react";
 import LineChart from "./components/LineChart";
 import Search from "./components/Search";
 import Loading from "./components/Loading";
@@ -20,10 +20,12 @@ function App() {
   const [data, setData] = useState<DataArr>([]);
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
   const [error, setError] = useState("");
+  const [hideSearchResults, setHideSearchResults] = useState(false);
 
   const [selectedCompany, setSelectedCompany] = useState(DEFAULT_COMPANY);
 
   const selectCompanyHandler = (symbol: string, desc: string) => {
+    setHideSearchResults(true);
     setSelectedCompany({
       symbol,
       desc,
@@ -71,27 +73,51 @@ function App() {
     content = <p className="error">{error}</p>;
   }
 
-  return (
-    <>
-      <div className="top-flex">
-        <div>
-          <a href="#" target="_blank">
-            <img src={logo} alt="" />
-          </a>
-        </div>
+  const onClickHandler = (event: MouseEvent<HTMLElement>) => {
+    const className = (event.target as Element).className;
+    if (
+      !hideSearchResults &&
+      className !== "search-input" &&
+      className !== "search-result"
+    )
+      setHideSearchResults(true);
+    else if (hideSearchResults && className === "search-input")
+      setHideSearchResults(false);
+  };
 
-        <Search onSelectCompany={selectCompanyHandler} />
+  return (
+    <div onClick={onClickHandler}>
+      <div className="outer-cont">
+        <header>
+          <a href="https://ikitrade-front.web.app">
+            <img src={logo} alt="logo" />
+          </a>
+        </header>
+        <main>
+          <Search
+            hideSearchResults={hideSearchResults}
+            onSelectCompany={selectCompanyHandler}
+          />
+
+          <div className="intervals-selected-company">
+            <SelectedCompany selectedCompany={selectedCompany} />
+
+            <div className="intervals">
+              {BUTTON_INTERVALS.map((interval, i) => (
+                <button
+                  onClick={clickIntervalHandler.bind(null, interval)}
+                  key={i}
+                >
+                  {interval}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="line-chart">{content}</div>
+        </main>
       </div>
-      <SelectedCompany selectedCompany={selectedCompany} />
-      <div className="intervals">
-        {BUTTON_INTERVALS.map((interval, i) => (
-          <button onClick={clickIntervalHandler.bind(null, interval)} key={i}>
-            {interval}
-          </button>
-        ))}
-      </div>
-      <div className="line-chart">{content}</div>
-    </>
+    </div>
   );
 }
 

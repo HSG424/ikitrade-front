@@ -1,12 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #202124;
-  max-width: 1080px;
   color: #fff;
+}
+
+.outer-cont {
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .line-chart {
   height: 500px;
   width: auto;
+  position: relative;
+  left: 18px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -15,19 +26,20 @@ body {
   }
 }
 
-.top-flex {
-  display: flex;
-  gap: 54px;
+header {
+  padding-top: 42px;
 }
 
-.top-flex img {
-  width: 138px;
-  margin-top: 50px;
-  margin-left: 52px;
+header a {
+  margin: 0 auto 25px auto;
+  position: relative;
+  left: 2px;
 }
 
-.top-flex input {
-  margin-top: 115px;
+header a,
+header a img {
+  width: 136px;
+  display: block;
 }
 
 form label {
@@ -35,8 +47,15 @@ form label {
   display: none;
 }
 
+.intervals-selected-company {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 29px;
+  margin-bottom: 21px;
+}
+
 .intervals {
-  margin: 35px 0 26px 51px;
+  margin: 0;
   display: flex;
   gap: 9px;
 }
@@ -44,6 +63,14 @@ form label {
 .intervals button {
   padding: 6px 16px;
   border-radius: 4px;
+}
+
+.selectedCompany p {
+  margin: 0;
+}
+
+.selectedCompany > p:first-child {
+  margin-bottom: 4px;
 }
 
 .tooltip {
@@ -86,18 +113,40 @@ form label {
   font-size: 22px;
 }
 
-.search-results ul {
+.search-cont {
+  width: 293px;
+  margin: 0 auto;
+  text-align: center;
+  /*background-color: green;*/
+}
+
+.search-cont form input {
+  width: 100%;
+  text-align: center;
+}
+
+.search-cont ul {
   list-style-type: none;
   padding-left: 0;
+  position: absolute;
+  z-index: 1;
+  /*background-color: yellow;*/
+  background: rgba(0, 0, 0, 0.8);
+  width: 299px;
+  margin-top: 11px;
 }
 
-.search-results ul li {
+.search-cont ul li {
   cursor: pointer;
-  margin: 9px 0;
-  padding: 7px 9px;
+  margin: 0;
+  padding: 11px 0;
 }
 
-.search-results ul li:hover {
-  background-color: #3c3e44;
+.search-cont ul li:hover {
+  /*  background-color: #3c3e44;*/
   background-color: #303136;
+}
+
+.hidden {
+  display: none;
 }
