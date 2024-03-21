@@ -1,8 +1,12 @@
 import loading from "/loading.svg";
 
-export const Loading = () => {
+interface LoadingProps {
+  className?: string;
+}
+
+export const Loading = ({ className }: LoadingProps) => {
   return (
-    <div className="loading-container">
+    <div className={`loading-container ${className}`}>
       <img src={loading} alt="loading" />
     </div>
   );

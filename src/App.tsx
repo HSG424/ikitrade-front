@@ -65,7 +65,7 @@ function App() {
     fetchChartDataHandler();
   }, [fetchChartDataHandler, interval]);
 
-  let content = <Loading />;
+  let content = <Loading className="chart-loading" />;
   if (data.length > 0) {
     content = <LineChart data={data} interval={interval} />;
   }

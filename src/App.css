@@ -87,10 +87,6 @@ form label {
   margin: 0;
 }
 
-.loading-container {
-  padding-top: 38px;
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -101,10 +97,25 @@ form label {
 }
 
 .loading-container img {
-  width: 60px;
   display: block;
   margin: 0 auto;
   animation: spin 2s linear infinite;
+}
+
+.search-loading {
+  padding: 15px 0;
+}
+
+.search-loading img {
+  width: 24px;
+}
+
+.chart-loading {
+  padding-top: 12px;
+}
+
+.chart-loading img {
+  width: 56px;
 }
 
 .error {
@@ -125,15 +136,16 @@ form label {
   text-align: center;
 }
 
+.search-cont > div.search-results-cont {
+  position: absolute;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
+  width: 299px;
+}
+
 .search-cont ul {
   list-style-type: none;
   padding-left: 0;
-  position: absolute;
-  z-index: 1;
-  /*background-color: yellow;*/
-  background: rgba(0, 0, 0, 0.8);
-  width: 299px;
-  margin-top: 11px;
 }
 
 .search-cont ul li {
@@ -145,6 +157,10 @@ form label {
 .search-cont ul li:hover {
   /*  background-color: #3c3e44;*/
   background-color: #303136;
+}
+
+.search-cont p {
+  padding: 12px 0;
 }
 
 .hidden {

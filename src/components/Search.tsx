@@ -55,14 +55,12 @@ const Search = ({ onSelectCompany, hideSearchResults }: SearchProps) => {
     onSelectCompany(symbol, desc);
   };
 
-  const hideResults = hideSearchResults ? "hidden" : "";
-
   let search = <div></div>;
   if (searchLoading) {
-    search = <Loading />;
+    search = <Loading className="search-loading" />;
   } else if (searchResults.length > 0) {
     search = (
-      <ul className={hideResults}>
+      <ul>
         {searchResults.map((results) => (
           <li
             className="search-result"
@@ -77,11 +75,7 @@ const Search = ({ onSelectCompany, hideSearchResults }: SearchProps) => {
       </ul>
     );
   } else if (searchResults.length === 0 && !noSearchYet) {
-    search = (
-      <ul className={hideResults}>
-        <li>No Results</li>
-      </ul>
-    );
+    search = <p>No Results</p>;
   }
 
   return (
@@ -99,7 +93,11 @@ const Search = ({ onSelectCompany, hideSearchResults }: SearchProps) => {
           maxLength={10}
         />
       </form>
-      {search}
+      <div
+        className={`search-results-cont ${hideSearchResults ? "hidden" : ""}`}
+      >
+        {search}
+      </div>
     </div>
   );
 };
