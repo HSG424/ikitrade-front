@@ -47,13 +47,6 @@ form label {
   display: none;
 }
 
-.intervals-selected-company {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 29px;
-  margin-bottom: 21px;
-}
-
 .intervals {
   margin: 0;
   display: flex;
@@ -65,11 +58,11 @@ form label {
   border-radius: 4px;
 }
 
-.selectedCompany p {
+.selected-company p {
   margin: 0;
 }
 
-.selectedCompany > p:first-child {
+.selected-company > p:first-child {
   margin-bottom: 4px;
 }
 
@@ -165,4 +158,32 @@ form label {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 830px) {
+  .intervals-selected-company {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .selected-company {
+    margin-bottom: 16px;
+  }
+
+  .selected-company p {
+    text-align: center;
+  }
+
+  .intervals-cont {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media only screen and (min-width: 831px) {
+  .intervals-selected-company {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 29px;
+    margin-bottom: 21px;
+  }
 }

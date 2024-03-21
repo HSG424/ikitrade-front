@@ -102,15 +102,17 @@ function App() {
           <div className="intervals-selected-company">
             <SelectedCompany selectedCompany={selectedCompany} />
 
-            <div className="intervals">
-              {BUTTON_INTERVALS.map((interval, i) => (
-                <button
-                  onClick={clickIntervalHandler.bind(null, interval)}
-                  key={i}
-                >
-                  {interval}
-                </button>
-              ))}
+            <div className="intervals-cont">
+              <div className="intervals">
+                {BUTTON_INTERVALS.map((interval, i) => (
+                  <button
+                    onClick={clickIntervalHandler.bind(null, interval)}
+                    key={i}
+                  >
+                    {interval}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 

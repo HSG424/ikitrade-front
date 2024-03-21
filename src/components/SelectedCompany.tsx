@@ -7,7 +7,7 @@ interface SelectedCompanyProps {
 
 const SelectedCompany = ({ selectedCompany }: SelectedCompanyProps) => {
   return (
-    <div className="selectedCompany">
+    <div className="selected-company">
       <p>{`Symbol: ${selectedCompany.symbol}`}</p>
       <p>{`${selectedCompany.desc}`}</p>
     </div>
