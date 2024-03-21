@@ -104,12 +104,13 @@ function App() {
 
             <div className="intervals-cont">
               <div className="intervals">
-                {BUTTON_INTERVALS.map((interval, i) => (
+                {BUTTON_INTERVALS.map((intervalMap, i) => (
                   <button
-                    onClick={clickIntervalHandler.bind(null, interval)}
+                    className={intervalMap === interval ? "active" : ""}
+                    onClick={clickIntervalHandler.bind(null, intervalMap)}
                     key={i}
                   >
-                    {interval}
+                    {intervalMap}
                   </button>
                 ))}
               </div>

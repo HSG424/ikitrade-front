@@ -17,7 +17,7 @@ body {
   height: 500px;
   width: auto;
   position: relative;
-  left: 18px;
+  left: 19px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -50,12 +50,21 @@ form label {
 .intervals {
   margin: 0;
   display: flex;
-  gap: 9px;
 }
 
 .intervals button {
-  padding: 6px 16px;
-  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  padding: 8px 17px;
+  background: #3c3e44;
+  border: none;
+  /*  border: 1px solid #6c757d;*/
+}
+
+.intervals button:hover,
+.intervals button.active {
+  background: #303136;
+  /* border: 1px solid gold;*/
 }
 
 .selected-company p {
