@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Mallanna&family=Play:wght@400;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +8,26 @@
 body {
   background: #202124;
   color: #fff;
+  font-size: 16px;
+}
+
+.font-a {
+  font-family: "Play", sans-serif;
+  /*font-weight: 700;*/
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-b {
+  font-family: "Bruno Ace SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-c {
+  font-family: "Mallanna", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .outer-cont {
@@ -27,18 +49,16 @@ body {
 }
 
 header {
-  padding-top: 42px;
+  padding-top: 58px;
 }
 
 header a {
-  margin: 0 auto 25px auto;
-  position: relative;
-  left: 2px;
+  margin: 0 auto;
 }
 
 header a,
 header a img {
-  width: 136px;
+  width: 140px;
   display: block;
 }
 
@@ -55,9 +75,10 @@ form label {
 .intervals button {
   cursor: pointer;
   color: #fff;
-  padding: 8px 17px;
+  padding: 10px 18px;
   background: #3c3e44;
   border: none;
+  font-size: 14px;
   /*  border: 1px solid #6c757d;*/
 }
 
@@ -65,6 +86,11 @@ form label {
 .intervals button.active {
   background: #303136;
   /* border: 1px solid gold;*/
+}
+
+.intervals button.active,
+.selected-company-symbol {
+  color: gold;
 }
 
 .selected-company p {
@@ -105,19 +131,19 @@ form label {
 }
 
 .search-loading {
-  padding: 15px 0;
+  padding: 12px 0;
 }
 
 .search-loading img {
-  width: 24px;
+  width: 26px;
 }
 
 .chart-loading {
-  padding-top: 12px;
+  padding-top: 7px;
 }
 
 .chart-loading img {
-  width: 56px;
+  width: 58px;
 }
 
 .error {
@@ -127,22 +153,42 @@ form label {
 }
 
 .search-cont {
-  width: 293px;
-  margin: 0 auto;
+  width: 286px;
+  margin: 28px auto 0;
   text-align: center;
-  /*background-color: green;*/
 }
 
 .search-cont form input {
   width: 100%;
   text-align: center;
+  font-size: 16px;
+  padding: 2px 0;
+  background: #3c3e44;
+  border: 1px solid #3c3e44;
+  color: #e6e6e6;
+  outline-color: red;
+}
+
+.search-cont form input:focus-visible {
+  outline: none;
+  border: 1px solid #54575f;
+}
+
+::placeholder {
+  color: #e6e6e6;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: #e6e6e6;
 }
 
 .search-cont > div.search-results-cont {
   position: absolute;
   z-index: 1;
   background: rgba(0, 0, 0, 0.6);
-  width: 299px;
+  width: 288px;
 }
 
 .search-cont ul {
@@ -153,7 +199,7 @@ form label {
 .search-cont ul li {
   cursor: pointer;
   margin: 0;
-  padding: 11px 0;
+  padding: 11px 11px;
 }
 
 .search-cont ul li:hover {
@@ -192,7 +238,8 @@ form label {
   .intervals-selected-company {
     display: flex;
     justify-content: space-between;
-    margin-top: 29px;
+    align-items: center;
+    margin-top: 27px;
     margin-bottom: 21px;
   }
 }

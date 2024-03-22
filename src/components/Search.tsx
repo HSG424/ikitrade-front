@@ -86,7 +86,7 @@ const Search = ({ onSelectCompany, hideSearchResults }: SearchProps) => {
           type="text"
           id="search"
           name="search"
-          className="search-input"
+          className="search-input font-c"
           placeholder="Search ticker, company or profile"
           value={searchInput}
           onChange={searchChangeHandler}

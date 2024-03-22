@@ -75,19 +75,18 @@ function App() {
 
   const onClickHandler = (event: MouseEvent<HTMLElement>) => {
     const className = (event.target as Element).className;
-    if (
-      !hideSearchResults &&
-      className !== "search-input" &&
-      className !== "search-result"
-    )
+
+    const searchInput = className.search("search-input");
+    const searchResult = className.search("search-result");
+
+    if (!hideSearchResults && searchInput && searchResult === -1)
       setHideSearchResults(true);
-    else if (hideSearchResults && className === "search-input")
-      setHideSearchResults(false);
+    else if (hideSearchResults && searchInput >= 0) setHideSearchResults(false);
   };
 
   return (
     <div onClick={onClickHandler}>
-      <div className="outer-cont">
+      <div className="outer-cont font-a">
         <header>
           <a href="https://ikitrade-front.web.app">
             <img src={logo} alt="logo" />
@@ -106,7 +105,9 @@ function App() {
               <div className="intervals">
                 {BUTTON_INTERVALS.map((intervalMap, i) => (
                   <button
-                    className={intervalMap === interval ? "active" : ""}
+                    className={`font-b ${
+                      intervalMap === interval ? "active" : ""
+                    }`}
                     onClick={clickIntervalHandler.bind(null, intervalMap)}
                     key={i}
                   >
