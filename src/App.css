@@ -38,8 +38,6 @@ body {
 .line-chart {
   height: 500px;
   width: auto;
-  position: relative;
-  left: 19px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -54,6 +52,8 @@ header {
 
 header a {
   margin: 0 auto;
+  position: relative;
+  left: 3px;
 }
 
 header a,
@@ -70,6 +70,14 @@ form label {
 .intervals {
   margin: 0;
   display: flex;
+}
+
+.intervals > button:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.intervals > button:last-child {
+  border-radius: 0 6px 6px 0;
 }
 
 .intervals button {
@@ -167,6 +175,7 @@ form label {
   border: 1px solid #3c3e44;
   color: #e6e6e6;
   outline-color: red;
+  border-radius: 6px;
 }
 
 .search-cont form input:focus-visible {
@@ -222,7 +231,7 @@ form label {
   }
 
   .selected-company {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .selected-company p {
@@ -241,5 +250,10 @@ form label {
     align-items: center;
     margin-top: 27px;
     margin-bottom: 21px;
+  }
+
+  .line-chart {
+    position: relative;
+    left: 15px;
   }
 }
