@@ -7,7 +7,7 @@ import { DataArr, Intervals } from "./types/types";
 import "./App.css";
 import logo from "/iki-logo.png";
 import { startEndDateCalc } from "./helpers/date";
-import { processChartData } from "./helpers/api";
+import { processChartData, closePriceCalc } from "./helpers/api";
 import {
   API_DOMAIN,
   API_DAILY,
@@ -51,10 +51,26 @@ function App() {
 
     try {
       const response = await fetch(`${API_DOMAIN}${resource}${queryParams}`);
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
+
+      /*
+      console.log("response", response);
+      console.log("status", typeof response.status, response.status);
+      console.log("headers", response.headers);
+      */
+
+      if (!response.ok) throw new Error("Something went wrong!");
+
       const data = await response.json();
+
+      const dataParsed = JSON.parse(data);
+
+      // console.log("dataParsed", dataParsed);
+
+      if (dataParsed.length === 0) throw new Error("No Data.");
+
+      if (dataParsed.detail?.search("request allocation") > 0)
+        throw new Error("API LIMIT REACHED.");
+
       setData(processChartData(data, interval));
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
@@ -84,6 +100,8 @@ function App() {
     else if (hideSearchResults && searchInput >= 0) setHideSearchResults(false);
   };
 
+  const closePrice = data[0]?.data ? closePriceCalc(data[0].data) : "";
+
   return (
     <div onClick={onClickHandler}>
       <div className="outer-cont font-a">
@@ -99,7 +117,10 @@ function App() {
           />
 
           <div className="intervals-selected-company">
-            <SelectedCompany selectedCompany={selectedCompany} />
+            <SelectedCompany
+              selectedCompany={selectedCompany}
+              closePrice={closePrice}
+            />
 
             <div className="intervals-cont">
               <div className="intervals">

@@ -7,7 +7,7 @@ interface TooltipProps {
 
 const Tooltip = ({ x, y }: TooltipProps) => {
   return (
-    <div className="tooltip">
+    <div className="tooltip font-c">
       <p>{x}</p>
       <p>${y}</p>
     </div>

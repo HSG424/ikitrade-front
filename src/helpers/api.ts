@@ -1,4 +1,5 @@
-import { Intervals, APIresponse } from "../types/types";
+import { Intervals, APIresponse, tickData } from "../types/types";
+import { numberWithCommas } from "./line-chart";
 
 export const processChartData = (json: string, interval: Intervals) => {
   const respObj: APIresponse[] = JSON.parse(json);
@@ -18,4 +19,8 @@ export const processChartData = (json: string, interval: Intervals) => {
       id: "1a",
     },
   ];
+};
+
+export const closePriceCalc = (respObj: tickData[]) => {
+  return `$${numberWithCommas(respObj.slice(-1)[0].y)}`;
 };
