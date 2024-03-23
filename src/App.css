@@ -93,12 +93,11 @@ form label {
 .intervals button:hover,
 .intervals button.active {
   background: #303136;
-  /* border: 1px solid gold;*/
 }
 
-.gold,
+.green,
 .intervals button.active {
-  color: gold;
+  color: #82c996;
 }
 
 .selected-company p {
@@ -125,7 +124,7 @@ form label {
 }
 
 .tooltip > p:last-child {
-  color: gold;
+  color: #82c996;
 }
 
 @keyframes spin {
@@ -163,7 +162,7 @@ form label {
   text-align: center;
   margin-top: 59px;
   font-size: 20px;
-  color: gold;
+  color: #82c996;
 }
 
 .search-cont {

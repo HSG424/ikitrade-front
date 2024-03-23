@@ -13,8 +13,8 @@ const SelectedCompany = ({
   return (
     <div className="selected-company">
       <p>
-        Symbol: <span className="gold">{selectedCompany.symbol}</span> | Close:{" "}
-        <span className="gold">{closePrice}</span>
+        Symbol: <span className="green">{selectedCompany.symbol}</span> | Close:{" "}
+        <span className="green">{closePrice}</span>
       </p>
       <p>{`${selectedCompany.desc}`}</p>
     </div>
