@@ -19,7 +19,9 @@ import {
 function App() {
   const [data, setData] = useState<DataArr>([]);
   const [interval, setInterval] = useState<Intervals>(DEFAULT_INTERVAL);
+
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const [hideSearchResults, setHideSearchResults] = useState(false);
 
   const [selectedCompany, setSelectedCompany] = useState(DEFAULT_COMPANY);
@@ -39,6 +41,7 @@ function App() {
   };
 
   const fetchChartDataHandler = useCallback(async () => {
+    setLoading(true);
     setData([]);
     setError("");
 
@@ -75,13 +78,19 @@ function App() {
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     }
+    setLoading(false);
   }, [interval, selectedCompany]);
 
   useEffect(() => {
     fetchChartDataHandler();
   }, [fetchChartDataHandler, interval]);
 
-  let content = <Loading className="chart-loading" />;
+  let content = <div></div>;
+
+  if (loading) {
+    content = <Loading className="chart-loading" />;
+  }
+
   if (data.length > 0) {
     content = <LineChart data={data} interval={interval} />;
   }
@@ -126,11 +135,13 @@ function App() {
               <div className="intervals">
                 {BUTTON_INTERVALS.map((intervalMap, i) => (
                   <button
+                    type="button"
                     className={`font-b ${
                       intervalMap === interval ? "active" : ""
                     }`}
                     onClick={clickIntervalHandler.bind(null, intervalMap)}
                     key={i}
+                    disabled={loading}
                   >
                     {intervalMap}
                   </button>
