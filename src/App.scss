@@ -1,13 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Mallanna&family=Play:wght@400;700&display=swap");
 
+/* sass variables */
+$dark-grey: #202124;
+$dark-grey-1: #303136;
+$dark-grey-2: #3c3e44;
+$accent-color: #82c996;
+$border-radius-size: 6px;
+/* END - sass variables */
+
+/* sass mixins */
+@mixin dark-background {
+  background: $dark-grey;
+}
+@mixin dark-background-1 {
+  background: $dark-grey-1;
+}
+@mixin dark-background-2 {
+  background: $dark-grey-2;
+}
+@mixin border-radius {
+  border-radius: $border-radius-size;
+}
+@mixin text-color-1 {
+  color: #fff;
+}
+@mixin text-color-2 {
+  color: #e6e6e6;
+}
+@mixin text-color-accent-1 {
+  color: $accent-color;
+}
+@mixin center {
+  display: block;
+  margin: 0 auto;
+}
+/* END - sass mixins */
+
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background: #202124;
-  color: #fff;
+  @include dark-background;
+  @include text-color-1;
   font-size: 16px;
 }
 
@@ -32,7 +68,7 @@ body {
 
 .outer-cont {
   max-width: 920px;
-  margin: 0 auto;
+  @include center;
 }
 
 .line-chart {
@@ -51,7 +87,7 @@ header {
 }
 
 header a {
-  margin: 0 auto;
+  @include center;
   position: relative;
   left: 3px;
 }
@@ -63,7 +99,7 @@ header a img {
 }
 
 form label {
-  color: #fff;
+  @include text-color-1;
   display: none;
 }
 
@@ -73,31 +109,30 @@ form label {
 }
 
 .intervals > button:first-child {
-  border-radius: 6px 0 0 6px;
+  border-radius: $border-radius-size 0 0 $border-radius-size;
 }
 
 .intervals > button:last-child {
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 $border-radius-size $border-radius-size 0;
 }
 
 .intervals button {
   cursor: pointer;
-  color: #fff;
+  @include text-color-1;
   padding: 10px 18px;
-  background: #3c3e44;
+  @include dark-background-2;
   border: none;
   font-size: 14px;
-  /*  border: 1px solid #6c757d;*/
 }
 
 .intervals button:hover,
 .intervals button.active {
-  background: #303136;
+  @include dark-background-1;
 }
 
 .green,
 .intervals button.active {
-  color: #82c996;
+  @include text-color-accent-1;
 }
 
 .selected-company p {
@@ -110,10 +145,10 @@ form label {
 
 .tooltip {
   background-color: rgba(0, 0, 0, 0.65);
-  color: #ffffff;
-  padding: 6px 9px;
+  @include text-color-1;
+  padding: 6px 8px;
   font-size: 17px;
-  border-radius: 4px;
+  @include border-radius;
   text-align: center;
 }
 
@@ -124,7 +159,7 @@ form label {
 }
 
 .tooltip > p:last-child {
-  color: #82c996;
+  @include text-color-accent-1;
 }
 
 @keyframes spin {
@@ -137,8 +172,7 @@ form label {
 }
 
 .loading-container img {
-  display: block;
-  margin: 0 auto;
+  @include center;
   animation: spin 2s linear infinite;
 }
 
@@ -162,7 +196,7 @@ form label {
   text-align: center;
   margin-top: 59px;
   font-size: 20px;
-  color: #82c996;
+  @include text-color-accent-1;
 }
 
 .search-cont {
@@ -176,11 +210,11 @@ form label {
   text-align: center;
   font-size: 16px;
   padding: 2px 0;
-  background: #3c3e44;
-  border: 1px solid #3c3e44;
-  color: #e6e6e6;
-  outline-color: red;
-  border-radius: 6px;
+  @include dark-background-2;
+  border: 1px solid $dark-grey-2;
+  @include text-color-2;
+  /*outline-color: red;*/
+  @include border-radius;
 }
 
 .search-cont form input:focus-visible {
@@ -189,13 +223,13 @@ form label {
 }
 
 ::placeholder {
-  color: #e6e6e6;
+  @include text-color-2;
   opacity: 1; /* Firefox */
 }
 
 ::-ms-input-placeholder {
   /* Edge 12 -18 */
-  color: #e6e6e6;
+  @include text-color-2;
 }
 
 .search-cont > div.search-results-cont {
@@ -217,8 +251,7 @@ form label {
 }
 
 .search-cont ul li:hover {
-  /*  background-color: #3c3e44;*/
-  background-color: #303136;
+  @include dark-background-1;
 }
 
 .search-cont p {

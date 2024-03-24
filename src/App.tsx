@@ -4,7 +4,7 @@ import Search from "./components/Search";
 import Loading from "./components/Loading";
 import SelectedCompany from "./components/SelectedCompany";
 import { DataArr, Intervals } from "./types/types";
-import "./App.css";
+import "./App.scss";
 import logo from "/iki-logo.png";
 import { startEndDateCalc } from "./helpers/date";
 import { processChartData, closePriceCalc } from "./helpers/api";
